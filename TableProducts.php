@@ -33,7 +33,7 @@ class TableProducts
                 $html .= "<td class='text-center'>{$row['prov_price']}</td>";
                 $html .= "<td class='text-center'>{$row['sell_price']}</td>";
                 $html .= "<td class='text-center'>
-                            <!--href='delete_user.php?id={$row['IdUsers']}'-->
+                            
                             <a class='btn btn-primary btn-sm' 
                                 data-bs-toggle='modal' 
                                 data-bs-target='#editProductModal'

@@ -42,7 +42,6 @@ $p = new TableProducts();
                 <?php echo $p->getAllProducts(); ?>
             </tbody>
         </table>
-
         <!-- Modal para Añadir Producto -->
         <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -90,8 +89,6 @@ $p = new TableProducts();
                 </div>
             </div>
         </div>
-
-
         <!-- Modal para Editar Producto -->
         <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -180,7 +177,6 @@ $p = new TableProducts();
                 <?php echo $t->getAllUsers(); ?>
             </tbody>
         </table>
-
         <!-- Modal para Añadir Usuario -->
         <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -220,7 +216,6 @@ $p = new TableProducts();
                 </div>
             </div>
         </div>
-
         <!-- Modal para Editar Usuario -->
         <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
