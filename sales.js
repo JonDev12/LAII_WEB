@@ -26,8 +26,12 @@ function fetchData(barcode) {
             // data es un objeto con la propiedad 'name'
             if (data) {
                 const { name } = data; // Cambiar 'Name' por 'name' para que coincida con la respuesta de la API
-                document.getElementById('productName').value = name; // Asigna el nombre al campo de entrada
-            }
+                const productNameInput = document.getElementById('productName');
+                productNameInput.value = name; // Asigna el nombre al campo de entrada
+            
+                // Cambiar el color de fondo
+                productNameInput.style.backgroundColor = 'green'; // Corrige el nombre de la propiedad
+            }            
         })
         .catch(error => {
             console.error('Error al obtener los datos del producto:', error);
