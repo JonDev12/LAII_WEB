@@ -28,9 +28,8 @@ function fetchData(barcode) {
                 const { name } = data; // Cambiar 'Name' por 'name' para que coincida con la respuesta de la API
                 const productNameInput = document.getElementById('productName');
                 productNameInput.value = name; // Asigna el nombre al campo de entrada
-            
                 // Cambiar el color de fondo
-                productNameInput.style.backgroundColor = 'green'; // Corrige el nombre de la propiedad
+                productNameInput.style.backgroundColor = '#90ee90'; // Verde claro
             }            
         })
         .catch(error => {
