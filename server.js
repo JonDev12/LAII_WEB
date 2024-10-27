@@ -108,7 +108,8 @@ app.get('/api/products/:barcode', (req, res) => {
             return res.status(500).send(error.message);
         }
         console.log('Producto obtenido:', results);
-        res.json(results);
+        console.log('Producto obtenido:', results[0].name);
+        res.json({ name: results[0].name });
     });
 });
 
