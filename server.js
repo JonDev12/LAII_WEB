@@ -98,6 +98,20 @@ app.delete('/api/products/:id', (req, res) => {
     });
 });
 
+//Funcion para obtener un producto por su codigo de barras
+app.get('/api/products/:barcode', (req, res) => {
+    const { barcode } = req.params;
+    console.log(`Recibiendo solicitud para obtener el producto con código de barras: ${barcode}`);
+    connection.query('SELECT * FROM products WHERE Bar_code = ?', [barcode], (error, results) => {
+        if (error) {
+            console.log('Error al obtener producto:', error.message);
+            return res.status(500).send(error.message);
+        }
+        console.log('Producto obtenido:', results);
+        res.json(results);
+    });
+});
+
 // CRUD para la tabla users
 
 // Ruta para obtener usuarios

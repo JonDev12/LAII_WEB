@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Ventas</a>
@@ -38,6 +40,12 @@
                     <input type="text" class="form-control" id="productName" placeholder="Ingrese el nombre del producto">
                 </div>
             </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <div class="form-group w-100">
+                    <button class="btn btn-primary w-100" id="addProduct">Agregar</button>
+                </div>
+            </div>
+
         </div>
 
         <!-- Tabla de ventas con scroll dinámico usando Bootstrap -->
@@ -53,7 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
+
                 </tbody>
             </table>
         </div>
@@ -63,4 +71,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>
