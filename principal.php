@@ -23,6 +23,9 @@ $p = new TableProducts();
         <!-- Tabla de Productos -->
         <h2>Tabla de Productos</h2>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProductModal">Añadir Producto</button>
+        <button class="btn btn-success mb-3 float-right" id="sales" onclick="goToSales(this)">
+            <i class="bi bi-bag-fill"></i>Ir a ventas
+        </button>
         <table class="table table-bordered table-responsive-md">
             <thead class="thead-dark">
                 <tr>
@@ -278,6 +281,7 @@ $p = new TableProducts();
     </div>
 
     <!-- Scripts de Bootstrap y jQuery -->
+    <script src="sales.js"></script>
     <script src="/user.js"></script>
     <script src="/product.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
