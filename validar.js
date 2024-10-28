@@ -34,6 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Si pasa todas las validaciones
         errorMessage.textContent = 'Login successful!';
         // Redirigir a otra página
-        window.location.href = './pagina.html'; // Cambia 'pagina.html' por la URL de la página a la que deseas redirigir
+        window.location.href = './pagina.php'; // Cambia 'pagina.html' por la URL de la página a la que deseas redirigir
     });
 });

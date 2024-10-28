@@ -47,7 +47,6 @@ function InsertUser(event) {
     }
 }
 
-
 function GetInfo(button){
     console.log('Recibiendo datos');
     var id = button.getAttribute('data-id');
@@ -108,3 +107,18 @@ function DeleteUser(button){
         })
     }
 )};
+
+function fetchUser(){
+    var user = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+
+    document.getElementById('btnLogin').addEventListener('click', function(){
+        fetch(`http://localhost:5000/api/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: user, password: password})
+        })
+    });
+}

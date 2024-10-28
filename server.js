@@ -189,3 +189,27 @@ app.delete('/api/users/:id', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+//CRUD de Verificacion de login de usuario
+
+// Ruta de verificacion de login de usuario
+app.post('/api/login', (req, res) => {
+    console.log('Recibiendo solicitud para verificar login de usuario:', req.body);
+    const { name, password } = req.body;
+    const query = `SELECT * FROM users WHERE email = ? AND password = ?`;
+
+    connection.query(query, [name, password], (error, results) => {
+        if (error) {
+            console.log('Error al verificar login de usuario:', error.message);
+            return res.status(500).send(error.message);
+        }
+
+        if (results.length === 0) {
+            console.log('Usuario no encontrado');
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        console.log('Usuario encontrado:', results[0]);
+        res.json({ message: 'Usuario encontrado', user: results[0] });
+    });
+});

@@ -3,8 +3,6 @@ require_once 'TableProducts.php';
 require_once 'TableUser.php';
 $t = new TableUser();
 $p = new TableProducts();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -20,31 +18,37 @@ $p = new TableProducts();
 
 <body>
     <div class="container mt-5">
+        <h1 class="text-center">Bienvenido</h1>
         <!-- Tabla de Productos -->
         <h2>Tabla de Productos</h2>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProductModal">Añadir Producto</button>
         <button class="btn btn-success mb-3 float-right" id="sales" onclick="goToSales(this)">
             <i class="bi bi-bag-fill"></i>Ir a ventas
         </button>
-        <table class="table table-bordered table-responsive-md">
+        <button class="btn btn-warning mb-3 float-right mr-2" id="sales" onclick="goToUsers(this)">
+            <i class="bi bi-person-fill"></i>Clientes 
+        </button>
+        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-bordered table-responsive-md">
             <thead class="thead-dark">
                 <tr>
-                    <th>Id</th>
-                    <th>Bar Code</th>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Proveedor</th>
-                    <th>Fecha Expiración</th>
-                    <th>Precio Proveedor</th>
-                    <th>Precio Venta</th>
-                    <th>Acciones</th>
+                <th>Id</th>
+                <th>Bar Code</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Proveedor</th>
+                <th>Fecha Expiración</th>
+                <th>Precio Proveedor</th>
+                <th>Precio Venta</th>
+                <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
                 <?php echo $p->getAllProducts(); ?>
             </tbody>
-        </table>
+            </table>
+        </div>
         <!-- Modal para Añadir Producto -->
         <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -163,23 +167,25 @@ $p = new TableProducts();
         <!-- Tabla de Usuarios -->
         <h2 class="mt-5">Tabla de Usuarios</h2>
         <button class="btn btn-primary mb-3" id="datos" data-toggle="modal" data-target="#addUserModal">Añadir Usuario</button>
-        <table class="table table-bordered table-responsive-md" id="usersTable">
+        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-bordered table-responsive-md" id="usersTable">
             <thead class="thead-dark">
                 <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Apellido</th>
-                    <th class="text-center">Clave</th>
-                    <th class="text-center">Teléfono</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Acciones</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Apellido</th>
+                <th class="text-center">Clave</th>
+                <th class="text-center">Teléfono</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
                 <?php echo $t->getAllUsers(); ?>
             </tbody>
-        </table>
+            </table>
+        </div>
         <!-- Modal para Añadir Usuario -->
         <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

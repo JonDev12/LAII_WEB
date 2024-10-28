@@ -34,7 +34,7 @@ function ValidateCaptcha() {
     const captchaFileName = captchaImgSrc.substring(captchaImgSrc.lastIndexOf('/') + 1);
 
     if (capcthavalues[captchaFileName] === captchaInput) {
-        window.location.href = './principal.html';
+        window.location.href = './principal.php';
     } else {
         alert('Captcha incorrecto');
         loadCaptchaImage();
