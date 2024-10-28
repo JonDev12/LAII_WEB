@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,12 @@
     <!-- Font Awesome CSS for shopping cart icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <h3 class="mb-4">Carrito de Compras</h3>
-        
+
+        <!-- Formulario para agregar productos -->
         <div class="row mb-4">
             <div class="col-md-2">
                 <div class="form-group">
@@ -20,20 +23,26 @@
                     <input type="text" class="form-control" id="barcode" placeholder="#####">
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="productName">Nombre del Producto</label>
                     <input type="text" class="form-control" id="productName" placeholder="Ingrese el nombre del producto">
                 </div>
             </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <div class="form-group w-100">
-                    <button class="btn btn-primary w-100" id="addProduct">Agregar</button>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="price">Precio</label>
+                    <input type="number" class="form-control" id="price" placeholder="0.00">
                 </div>
             </div>
-
+            <div class="col-md-2"> <!-- Nueva columna para el botón -->
+                <div class="form-group mt-2">
+                    <button type="button" class="btn btn-primary mt-4">Agregar Producto</button> <!-- Botón para agregar producto -->
+                </div>
+            </div>
         </div>
 
+        <!-- Lista de productos y resumen del carrito -->
         <div class="row">
             <div class="col-md-8">
                 <div class="list-group">
@@ -70,6 +79,8 @@
                     <!-- Agrega más productos según sea necesario -->
                 </div>
             </div>
+
+            <!-- Resumen del carrito -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -121,12 +132,12 @@
         </div>
     </div>
 
+    <!-- Archivos de JavaScript -->
     <script src="cart.js"></script>
-    <!-- jQuery, Popper.js, and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
     <!-- Script para calcular el cambio -->
     <script>
         function calculateChange() {
@@ -134,7 +145,7 @@
             const amountPaid = parseFloat(document.getElementById('amountPaid').value);
             const paymentMethod = document.getElementById('paymentMethod').value;
             const changeField = document.getElementById('change');
-            
+
             if (paymentMethod === 'efectivo' && amountPaid >= total) {
                 const change = amountPaid - total;
                 changeField.value = `$${change.toFixed(2)}`;
@@ -147,4 +158,5 @@
         }
     </script>
 </body>
+
 </html>

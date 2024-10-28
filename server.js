@@ -109,7 +109,13 @@ app.get('/api/products/:barcode', (req, res) => {
         }
         console.log('Producto obtenido:', results);
         console.log('Producto obtenido:', results[0].name);
-        res.json({ name: results[0].name });
+        console.log('Producto obtenido:', results[0].sell_price);
+        res.json(
+            { 
+                name: results[0].name,
+                sell_price: results[0].sell_price
+            }
+            );
     });
 });
 

@@ -25,11 +25,14 @@ function fetchData(barcode) {
         .then(data => {
             // data es un objeto con la propiedad 'name'
             if (data) {
-                const { name } = data; // Cambiar 'Name' por 'name' para que coincida con la respuesta de la API
+                const { name, sell_price} = data; // Cambiar 'Name' por 'name' para que coincida con la respuesta de la API
                 const productNameInput = document.getElementById('productName');
+                const productPriceInput = document.getElementById('price');
                 productNameInput.value = name; // Asigna el nombre al campo de entrada
+                productPriceInput.value = sell_price; // Asigna el precio al campo de entrada
                 // Cambiar el color de fondo
                 productNameInput.style.backgroundColor = '#90ee90'; // Verde claro
+                productPriceInput.style.backgroundColor = '#90ee90'; // Verde claro
             }            
         })
         .catch(error => {
