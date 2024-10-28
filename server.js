@@ -196,7 +196,7 @@ app.listen(PORT, () => {
 app.post('/api/login', (req, res) => {
     console.log('Recibiendo solicitud para verificar login de usuario:', req.body);
     const { name, password } = req.body;
-    const query = `SELECT * FROM users WHERE email = ? AND password = ?`;
+    const query = `SELECT * FROM users WHERE name = ? AND password = ?`;
 
     connection.query(query, [name, password], (error, results) => {
         if (error) {

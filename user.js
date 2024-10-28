@@ -108,17 +108,25 @@ function DeleteUser(button){
     }
 )};
 
-function fetchUser(){
-    var user = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+function fetchUser() {
+    document.getElementById('btnLogin').addEventListener('click', function() {
+        var user = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
 
-    document.getElementById('btnLogin').addEventListener('click', function(){
         fetch(`http://localhost:5000/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name: user, password: password})
+            body: JSON.stringify({ name: user, password: password })
         })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Login successful:', data);
+            // Aquí puedes agregar lógica adicional después de un inicio de sesión exitoso
+        })
+        .catch(error => {
+            console.error('Error during login:', error);
+        });
     });
 }

@@ -27,7 +27,7 @@
                             </div>
                             <div id="error-message" class="text-danger mb-3"></div>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" id="btnLogin" onclick="fetchUser()" class="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>
@@ -39,6 +39,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
+     <script src="./user.js"></script>
     <script src="./validar.js"></script>
 </body>
 </html>
