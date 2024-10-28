@@ -27,27 +27,6 @@
     </nav>
 
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="barcode">Código de Barras</label>
-                    <input type="text" class="form-control" id="barcode" placeholder="#####">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="productName">Nombre del Producto</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Ingrese el nombre del producto">
-                </div>
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <div class="form-group w-100">
-                    <button class="btn btn-primary w-100" id="addProduct">Agregar</button>
-                </div>
-            </div>
-
-        </div>
-
         <!-- Tabla de ventas con scroll dinámico usando Bootstrap -->
         <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
             <table class="table table-striped table-bordered mt-4">

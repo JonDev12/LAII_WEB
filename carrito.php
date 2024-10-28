@@ -11,7 +11,29 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">Carrito de Compras</h2>
+        <h3 class="mb-4">Carrito de Compras</h3>
+        
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="barcode">Código de Barras</label>
+                    <input type="text" class="form-control" id="barcode" placeholder="#####">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="productName">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="productName" placeholder="Ingrese el nombre del producto">
+                </div>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <div class="form-group w-100">
+                    <button class="btn btn-primary w-100" id="addProduct">Agregar</button>
+                </div>
+            </div>
+
+        </div>
+
         <div class="row">
             <div class="col-md-8">
                 <div class="list-group">
@@ -99,6 +121,7 @@
         </div>
     </div>
 
+    <script src="cart.js"></script>
     <!-- jQuery, Popper.js, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
