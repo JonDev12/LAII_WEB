@@ -102,22 +102,26 @@ app.delete('/api/products/:id', (req, res) => {
 app.get('/api/products/:barcode', (req, res) => {
     const { barcode } = req.params;
     console.log(`Recibiendo solicitud para obtener el producto con código de barras: ${barcode}`);
+
     connection.query('SELECT * FROM products WHERE Bar_code = ?', [barcode], (error, results) => {
         if (error) {
             console.log('Error al obtener producto:', error.message);
             return res.status(500).send(error.message);
         }
-        console.log('Producto obtenido:', results);
-        console.log('Producto obtenido:', results[0].name);
-        console.log('Producto obtenido:', results[0].sell_price);
-        res.json(
-            { 
-                name: results[0].name,
-                sell_price: results[0].sell_price
-            }
-            );
+
+        if (results.length === 0) {
+            console.log('No se encontró ningún producto con el código de barras:', barcode);
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        console.log('Producto obtenido:', results[0]);
+        res.json({ 
+            name: results[0].name,
+            sell_price: results[0].sell_price
+        });
     });
 });
+
 
 // CRUD para la tabla users
 
