@@ -25,7 +25,7 @@ $p = new TableProducts();
         <button class="btn btn-success mb-3 float-right" id="sales" onclick="goToSales(this)">
             <i class="bi bi-bag-fill"></i>Ir a ventas
         </button>
-        <button class="btn btn-warning mb-3 float-right mr-2" id="sales" onclick="goToUsers(this)">
+        <button class="btn btn-warning mb-3 float-right mr-2" id="sales" onclick="goToClients()">
             <i class="bi bi-person-fill"></i>Clientes 
         </button>
         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
@@ -287,7 +287,8 @@ $p = new TableProducts();
     </div>
 
     <!-- Scripts de Bootstrap y jQuery -->
-    <script src="sales.js"></script>
+     <script src="sales.js"></script>
+    <script src="clients.js"></script>
     <script src="/user.js"></script>
     <script src="/product.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
