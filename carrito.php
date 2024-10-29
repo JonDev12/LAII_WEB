@@ -76,6 +76,10 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
+                            <label for="seller">Vendedor</label>
+                            <input type="text" class="form-control" id="seller" placeholder="Ingrese el nombre del vendedor">
+                        </div>
+                        <div class="form-group">
                             <label for="paymentMethod">Método de Pago</label>
                             <select class="form-control" id="paymentMethod">
                                 <option value="efectivo">Efectivo</option>
