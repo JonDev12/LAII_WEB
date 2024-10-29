@@ -108,7 +108,7 @@ function DeleteUser(button){
     }
 )};
 
-function fetchUser() {
+/*function fetchUser() {
     document.getElementById('btnLogin').addEventListener('click', function() {
         var user = document.getElementById('username').value;
         var password = document.getElementById('password').value;
@@ -129,4 +129,4 @@ function fetchUser() {
             console.error('Error during login:', error);
         });
     });
-}
+}*/

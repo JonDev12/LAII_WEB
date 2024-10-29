@@ -1,39 +1,58 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('loginForm');
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
     const errorMessage = document.getElementById('error-message');
     let attempts = 0;
     const maxAttempts = 3;
 
-    form.addEventListener('submit', function (event) {
+    document.getElementById('btnLogin').addEventListener('click', function(event) {
         event.preventDefault();
         errorMessage.textContent = '';
-        // Validar que los campos no estén vacíos
-        if (username.value.trim() === '' || password.value.trim() === '') {
+
+        const user = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (user === '' || password === '') {
             errorMessage.textContent = 'Both fields are required.';
             return;
         }
-        // Validar longitud de la contraseña
-        if (password.value.length < 8) {
+
+        if (password.length < 8) {
             errorMessage.textContent = 'Password must be at least 8 characters long.';
             return;
         }
-        // Validar que la contraseña contenga al menos una letra mayúscula
-        if (!/[A-Z]/.test(password.value)) {
+
+        if (!/[A-Z]/.test(password)) {
             errorMessage.textContent = 'Password must contain at least one uppercase letter.';
             return;
         }
-        // Incrementar intentos de registro
+
         attempts++;
         if (attempts >= maxAttempts) {
             errorMessage.textContent = 'Maximum login attempts exceeded.';
-            form.querySelector('button').disabled = true;
+            document.getElementById('btnLogin').disabled = true;
             return;
         }
-        // Si pasa todas las validaciones
-        errorMessage.textContent = 'Login successful!';
-        // Redirigir a otra página
-        window.location.href = './pagina.php'; // Cambia 'pagina.html' por la URL de la página a la que deseas redirigir
+
+        fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: user, password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Login successful:', data);
+                //window.location.href = './principal.php?user=' + encodeURIComponent(user);
+                window.location.href = './captchalogin.php?user=' + encodeURIComponent(user);
+            } else {
+                errorMessage.textContent = data.message; // Mostrar mensaje de error recibido del servidor
+            }
+        })
+        .catch(error => {
+            errorMessage.textContent = 'An error occurred during login. Please try again.';
+            console.error('Error during login:', error);
+        });
     });
 });

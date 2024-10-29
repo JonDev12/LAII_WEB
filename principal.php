@@ -18,35 +18,39 @@ $p = new TableProducts();
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Bienvenido</h1>
-        <!-- Tabla de Productos -->
+        <h1 id="welcome" class="text-center">
+            <?php
+            $username = isset($_GET['user']) ? htmlspecialchars($_GET['user']) : 'Invitado';
+            echo "Bienvenido $username";
+            ?>
+        </h1> <!-- Tabla de Productos -->
         <h2>Tabla de Productos</h2>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProductModal">Añadir Producto</button>
         <button class="btn btn-success mb-3 float-right" id="sales" onclick="goToSales(this)">
             <i class="bi bi-bag-fill"></i>Ir a ventas
         </button>
         <button class="btn btn-warning mb-3 float-right mr-2" id="sales" onclick="goToClients()">
-            <i class="bi bi-person-fill"></i>Clientes 
+            <i class="bi bi-person-fill"></i>Clientes
         </button>
         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
             <table class="table table-bordered table-responsive-md">
-            <thead class="thead-dark">
-                <tr>
-                <th>Id</th>
-                <th>Bar Code</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Proveedor</th>
-                <th>Fecha Expiración</th>
-                <th>Precio Proveedor</th>
-                <th>Precio Venta</th>
-                <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
-                <?php echo $p->getAllProducts(); ?>
-            </tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Bar Code</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Proveedor</th>
+                        <th>Fecha Expiración</th>
+                        <th>Precio Proveedor</th>
+                        <th>Precio Venta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
+                    <?php echo $p->getAllProducts(); ?>
+                </tbody>
             </table>
         </div>
         <!-- Modal para Añadir Producto -->
@@ -169,21 +173,21 @@ $p = new TableProducts();
         <button class="btn btn-primary mb-3" id="datos" data-toggle="modal" data-target="#addUserModal">Añadir Usuario</button>
         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
             <table class="table table-bordered table-responsive-md" id="usersTable">
-            <thead class="thead-dark">
-                <tr>
-                <th class="text-center">Id</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Apellido</th>
-                <th class="text-center">Clave</th>
-                <th class="text-center">Teléfono</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
-                <?php echo $t->getAllUsers(); ?>
-            </tbody>
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Apellido</th>
+                        <th class="text-center">Clave</th>
+                        <th class="text-center">Teléfono</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí irían las filas dinámicamente cargadas desde la base de datos -->
+                    <?php echo $t->getAllUsers(); ?>
+                </tbody>
             </table>
         </div>
         <!-- Modal para Añadir Usuario -->
@@ -287,7 +291,7 @@ $p = new TableProducts();
     </div>
 
     <!-- Scripts de Bootstrap y jQuery -->
-     <script src="sales.js"></script>
+    <script src="sales.js"></script>
     <script src="clients.js"></script>
     <script src="/user.js"></script>
     <script src="/product.js"></script>

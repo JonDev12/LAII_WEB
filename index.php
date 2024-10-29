@@ -27,7 +27,7 @@
                             </div>
                             <div id="error-message" class="text-danger mb-3"></div>
                             <div class="d-grid gap-2">
-                                <button type="submit" id="btnLogin" onclick="fetchUser()" class="btn btn-primary">Login</button>
+                                <button type="submit" id="btnLogin" class="btn btn-primary">Login</button>
                             </div>
                         </form>
                     </div>

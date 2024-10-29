@@ -190,13 +190,18 @@ app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
-//CRUD de Verificacion de login de usuario
+// CRUD de Verificacion de login de usuario
 
 // Ruta de verificacion de login de usuario
 app.post('/api/login', (req, res) => {
     console.log('Recibiendo solicitud para verificar login de usuario:', req.body);
     const { name, password } = req.body;
-    const query = `SELECT * FROM users WHERE name = ? AND password = ?`;
+
+    if (!name || !password) {
+        return res.status(400).json({ success: false, message: 'Missing username or password' });
+    }
+
+    const query = `SELECT * FROM users WHERE Name = ? AND Password = ?`; // Asegúrate de que los nombres de las columnas son correctos
 
     connection.query(query, [name, password], (error, results) => {
         if (error) {
@@ -205,11 +210,11 @@ app.post('/api/login', (req, res) => {
         }
 
         if (results.length === 0) {
-            console.log('Usuario no encontrado');
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+            console.log('Usuario o contraseña incorrectos');
+            return res.status(401).json({ success: false, message: 'Invalid username or password' });
         }
 
         console.log('Usuario encontrado:', results[0]);
-        res.json({ message: 'Usuario encontrado', user: results[0] });
+        res.json({ success: true, message: 'Login successful', user: results[0] });
     });
 });
