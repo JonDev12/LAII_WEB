@@ -1,3 +1,23 @@
+function goToCart() {
+    // Function to get the username from the URL
+    function getUsernameFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('user');
+    }
+
+    const user = getUsernameFromURL(); // Obtener el nombre de usuario de la URL
+
+    // Redirigir a ventas.php, pasando el nombre de usuario como parámetro
+    if (user) {
+        window.location.href = "carrito.php?user=" + encodeURIComponent(user);
+    } else {
+        console.error('Usuario no encontrado en la URL');
+        // Manejar el caso en que no hay un usuario
+        alert('Error: Usuario no encontrado');
+    }
+}
+
+
 function geTProductByBarcode() {
     const inputCode = document.getElementById('barcode');
     inputCode.addEventListener('keypress', function(event) {

@@ -20,9 +20,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto"></ul>
             <!-- Icono de Carrito de Compras -->
-            <a href="carrito.php" class="nav-link">
+            <button class="btn btn-outline-secondary" onclick="goToCart()">
                 <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
-            </a>
+            </button>
         </div>
     </nav>
 
@@ -46,6 +46,7 @@
         </div>
     </div>
 
+    <script src="cart.js"></script>
     <script src="sales.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
