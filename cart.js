@@ -165,6 +165,10 @@ function updateCartTotal() {
         total += quantity * unitPrice;
     });
     document.getElementById('totalPrice').textContent = total.toFixed(2);
+    const totalPriceInput = document.getElementById('total');
+    if (totalPriceInput) {
+        totalPriceInput.value = total.toFixed(2);
+    }
 }
 
 // Ejecutar las funciones cuando el DOM esté listo

@@ -80,6 +80,10 @@
                             <input type="text" class="form-control" id="seller" placeholder="Ingrese el nombre del vendedor" readonly>
                         </div>
                         <div class="form-group">
+                            <label for="total">Total</label>
+                            <input type="text" class="form-control" id="total" placeholder="Total de la compra" readonly>
+                        </div>
+                        <div class="form-group">
                             <label for="paymentMethod">Método de Pago</label>
                             <select class="form-control" id="paymentMethod">
                                 <option value="efectivo">Efectivo</option>
