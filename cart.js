@@ -16,7 +16,7 @@ function goToCart() {
     }
 }
 
-function geTProductByBarcode() {
+function getProductByBarcode() {
     const inputCode = document.getElementById('barcode');
     inputCode.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
@@ -81,7 +81,7 @@ function stackProduct(product) {
                 <div class="col-md-6">
                     <h5>${product.name}</h5>
                     <p>Cantidad</p>
-                    <div class="input-group">
+                    <div class="input-group ">
                         <div class="input-group-prepend">
                             <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity(this)">-</button>
                         </div>
@@ -92,13 +92,16 @@ function stackProduct(product) {
                     </div>
                 </div>
                 <div class="col-md-3 text-right">
-                    <h5>$<span class="unit-price">${product.sell_price}</span></h5>
+                    <h5>Precio Unitario: $<span class="unit-price">${product.sell_price}</span></h5>
+                    <h6>Total: $<span class="total-price">${product.sell_price}</span></h6>
+                    <button class="btn btn-danger btn-sm mt-2" onclick="removeProduct(this)">Eliminar</button>
                 </div>
             </div>
         </div>
     `;
 
     productList.insertAdjacentHTML('beforeend', productHTML);
+    updateCartTotal();  // Actualizar el total cada vez que se agrega un producto
 }
 
 function increaseQuantity(button) {
@@ -122,13 +125,14 @@ function updateTotal(button, quantity) {
     const unitPrice = parseFloat(productItem.querySelector('.unit-price').textContent);
     const totalPrice = productItem.querySelector('.total-price');
     totalPrice.textContent = (unitPrice * quantity).toFixed(2);
+
+    updateCartTotal();  // Actualizar el total del carrito
 }
-
-
 
 function removeProduct(button) {
     const productItem = button.closest('.list-group-item');
     productItem.remove();
+    updateCartTotal();  // Actualizar el total después de eliminar un producto
 }
 
 // Obtener y establecer el usuario en el campo 'seller' si está disponible en la URL
@@ -143,8 +147,29 @@ function setUserFromURL() {
     }
 }
 
+function addProductToCart() {
+    const barcode = document.getElementById('barcode').value;
+    if (barcode) {
+        fetchData(barcode);
+    } else {
+        alert('Ingrese un código de barras válido');
+    }
+}
+
+function updateCartTotal() {
+    const productItems = document.querySelectorAll('.list-group-item');
+    let total = 0;
+    productItems.forEach(item => {
+        const quantity = parseInt(item.querySelector('.quantity-input').value);
+        const unitPrice = parseFloat(item.querySelector('.unit-price').textContent);
+        total += quantity * unitPrice;
+    });
+    document.getElementById('totalPrice').textContent = total.toFixed(2);
+}
+
 // Ejecutar las funciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    geTProductByBarcode();
+    getProductByBarcode();
     setUserFromURL();
+    document.querySelector('.btn-primary.mt-4').addEventListener('click', addProductToCart);
 });

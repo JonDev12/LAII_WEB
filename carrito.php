@@ -77,7 +77,7 @@
                     <form>
                         <div class="form-group">
                             <label for="seller">Vendedor</label>
-                            <input type="text" class="form-control" id="seller" placeholder="Ingrese el nombre del vendedor">
+                            <input type="text" class="form-control" id="seller" placeholder="Ingrese el nombre del vendedor" readonly>
                         </div>
                         <div class="form-group">
                             <label for="paymentMethod">Método de Pago</label>
