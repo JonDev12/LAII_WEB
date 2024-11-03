@@ -80,11 +80,19 @@ function stackProduct(product) {
                 </div>
                 <div class="col-md-6">
                     <h5>${product.name}</h5>
-                    <p>Precio: $${product.sell_price}</p>
+                    <p>Cantidad</p>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity(this)">-</button>
+                        </div>
+                        <input type="text" class="form-control quantity-input" value="1" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity(this)">+</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3 text-right">
-                    <h5>$${product.sell_price}</h5>
-                    <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Eliminar</button>
+                    <h5>$<span class="unit-price">${product.sell_price}</span></h5>
                 </div>
             </div>
         </div>
@@ -92,6 +100,31 @@ function stackProduct(product) {
 
     productList.insertAdjacentHTML('beforeend', productHTML);
 }
+
+function increaseQuantity(button) {
+    const quantityInput = button.parentElement.previousElementSibling;
+    let quantity = parseInt(quantityInput.value);
+    quantityInput.value = quantity + 1;
+    updateTotal(button, quantity + 1);
+}
+
+function decreaseQuantity(button) {
+    const quantityInput = button.parentElement.nextElementSibling;
+    let quantity = parseInt(quantityInput.value);
+    if (quantity > 1) {
+        quantityInput.value = quantity - 1;
+        updateTotal(button, quantity - 1);
+    }
+}
+
+function updateTotal(button, quantity) {
+    const productItem = button.closest('.list-group-item');
+    const unitPrice = parseFloat(productItem.querySelector('.unit-price').textContent);
+    const totalPrice = productItem.querySelector('.total-price');
+    totalPrice.textContent = (unitPrice * quantity).toFixed(2);
+}
+
+
 
 function removeProduct(button) {
     const productItem = button.closest('.list-group-item');
