@@ -171,9 +171,60 @@ function updateCartTotal() {
     }
 }
 
+function checkInternetConnection() {
+    const paymentMethodSelect = document.getElementById('paymentMethod');
+    const tarjetaOption = document.getElementById('tarjetaOption');
+    const amountPaidGroup = document.getElementById('amountPaidGroup');
+    const bankTypeGroup = document.getElementById('bankTypeGroup');
+    const cardNumberGroup = document.getElementById('cardNumberGroup');
+    
+    paymentMethodSelect.disabled = false; // Permitir seleccionar método de pago siempre que haya opciones
+
+    if (navigator.onLine) {
+        tarjetaOption.disabled = false;       // Habilitar opción de tarjeta si hay conexión
+    } else {
+        paymentMethodSelect.value = "efectivo"; // Cambiar a efectivo si no hay conexión
+        tarjetaOption.disabled = true;         // Deshabilitar opción de tarjeta
+        cardNumberGroup.style.display = 'none'; // Ocultar número de tarjeta
+        bankTypeGroup.style.display = 'none';   // Ocultar tipo de banco
+        amountPaidGroup.style.display = 'block'; // Mostrar cantidad pagada
+        alert('No hay conexión a internet. El método de tarjeta no está disponible.');
+    }
+}
+
+function HidePayment() {
+    const paymentMethodSelect = document.getElementById('paymentMethod');
+    const cardNumberGroup = document.getElementById('cardNumberGroup');
+    const amountPaidGroup = document.getElementById('amountPaidGroup');
+    const bankTypeGroup = document.getElementById('bankTypeGroup');
+
+    paymentMethodSelect.addEventListener('change', () => {
+        const selectedValue = paymentMethodSelect.value;
+
+        // Ocultar todos los campos al inicio
+        cardNumberGroup.style.display = 'none';
+        amountPaidGroup.style.display = 'none';
+        bankTypeGroup.style.display = 'none';
+
+        // Mostrar los campos correspondientes según la selección
+        if (selectedValue === 'tarjeta') {
+            cardNumberGroup.style.display = 'block'; // Mostrar número de tarjeta
+            bankTypeGroup.style.display = 'block';    // Mostrar tipo de banco
+        } else if (selectedValue === 'efectivo') {
+            amountPaidGroup.style.display = 'block'; // Mostrar cantidad pagada
+        }
+    });
+}
+
 // Ejecutar las funciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     getProductByBarcode();
     setUserFromURL();
     document.querySelector('.btn-primary.mt-4').addEventListener('click', addProductToCart);
+    HidePayment();
+    checkInternetConnection();
 });
+
+// Escuchar cambios en el estado de la conexión
+window.addEventListener('online', checkInternetConnection);
+window.addEventListener('offline', checkInternetConnection);

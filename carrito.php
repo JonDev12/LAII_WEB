@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Font Awesome CSS for shopping cart icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <h3 class="mb-4">Carrito de Compras</h3>
@@ -84,13 +86,33 @@
                             <input type="text" class="form-control" id="total" placeholder="Total de la compra" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="paymentMethod">Método de Pago</label>
-                            <select class="form-control" id="paymentMethod">
-                                <option value="efectivo">Efectivo</option>
-                                <option value="tarjeta">Tarjeta</option>
+                            <label for="frecClient">Seleccione el cliente frecuente</label>
+                            <select class="form-control" id="frecClient">
+                                <!--Aqui va codigo en php-->
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="paymentMethod">Método de Pago</label>
+                            <select class="form-control" id="paymentMethod">
+                                <option value="">Seleccione un método</option>
+                                <option value="efectivo">Efectivo</option>
+                                <option value="tarjeta" id="tarjetaOption">Tarjeta</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="bankTypeGroup" style="display: none;">
+                            <label for="typebank">Seleccione el tipo de Banco</label>
+                            <select class="form-control" id="typebank">
+                                <!-- Aquí va código en PHP -->
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="cardNumberGroup" style="display: none;">
+                            <label for="cardNumber">Número de Tarjeta</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Ingrese el número de tarjeta">
+                        </div>
+
+                        <div class="form-group" id="amountPaidGroup" style="display: none;">
                             <label for="amountPaid">Cantidad Pagada</label>
                             <input type="number" class="form-control" id="amountPaid" placeholder="Ingrese la cantidad con la que paga">
                         </div>
@@ -114,4 +136,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
