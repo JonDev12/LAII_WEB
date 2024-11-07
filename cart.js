@@ -101,6 +101,7 @@ function stackProduct(product) {
     `;
 
     productList.insertAdjacentHTML('beforeend', productHTML);
+    sendData(product);
     updateCartTotal();  // Actualizar el total cada vez que se agrega un producto
 }
 
@@ -214,6 +215,10 @@ function HidePayment() {
             amountPaidGroup.style.display = 'block'; // Mostrar cantidad pagada
         }
     });
+}
+
+function senData(productToAPI){
+    productToAPI
 }
 
 // Ejecutar las funciones cuando el DOM esté listo

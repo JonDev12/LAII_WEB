@@ -218,3 +218,22 @@ app.post('/api/login', (req, res) => {
         res.json({ success: true, message: 'Login successful', user: results[0] });
     });
 });
+
+// CRUD de la tabla de ventas
+app.post('/api/sales', (req, res) => {
+    console.log('Datos recibidos:', req.body); // Verifica los datos aquí
+    const { Descripcion, Cliente, Productos, Total, Pago, Cambio, Fecha } = req.body;
+
+    // Asegúrate de que los valores sean correctos
+    const query = `INSERT INTO ventas (Descripcion, Cliente, Productos, Total, Pago, Cambio, Fecha) 
+                   VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+    connection.query(query, [Descripcion, Cliente, Productos, Total, Pago, Cambio, Fecha], (error, results) => {
+        if (error) {
+            console.log('Error al crear venta:', error.message);
+            return res.status(500).send(error.message);
+        }
+        console.log('Venta creada:', results);
+        res.json({ message: 'Venta creada', id: results.insertId });
+    });
+});
