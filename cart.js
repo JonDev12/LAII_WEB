@@ -217,9 +217,193 @@ function HidePayment() {
     });
 }
 
-function senData(productToAPI){
-    productToAPI
+async function ticket() {
+    const productList = document.querySelector('.list-group');
+    const productItems = document.querySelectorAll('.list-group-item');
+    const seller = document.getElementById('seller').value;
+
+    // Obtener el valor del cliente frecuente
+    const clientSelect = document.getElementById('frecClient');
+    const client = clientSelect.value !== 'sel' ? clientSelect.options[clientSelect.selectedIndex].text : 'No especificado';
+    
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    let total = 0;
+    let products = [];
+    let description = '';
+
+    // Recolecta los productos y calcula el total
+    productItems.forEach(item => {
+        const product = {
+            name: item.querySelector('h5').textContent,
+            quantity: parseInt(item.querySelector('.quantity-input').value),
+            unit_price: parseFloat(item.querySelector('.unit-price').textContent),
+            total_price: parseFloat(item.querySelector('.total-price').textContent)
+        };
+        total += product.total_price;
+        products.push(product);
+        description += `${product.name} x ${product.quantity}\n`;
+    });
+
+    // Actualizamos el total en el input de total
+    document.getElementById('total').value = total.toFixed(2);
+
+    let change = 0;
+    if (paymentMethod === 'tarjeta') {
+        const cardNumberInput = document.getElementById('cardNumber');
+        const cardNumber = cardNumberInput.value;
+        const bankTypeSelect = document.getElementById('bankType');
+
+        // Validación del número de tarjeta y selección del banco
+        const cardType = detectCardType(cardNumber);
+        if (cardType) {
+            bankTypeSelect.value = cardType;
+        } else {
+            console.log('Número de tarjeta inválido');
+            return;
+        }
+    } else {
+        const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
+        change = calculateChange(total, amountPaid);
+    }
+
+    // Preparamos la fecha actual en formato YYYY-MM-DD
+    const date = new Date().toISOString().split('T')[0];
+
+    // Preparar los datos para enviar a la API
+    const saleData = {
+        Descripcion: description.trim(),
+        Cliente: client,
+        Productos: products.length,
+        Total: total.toFixed(2),
+        Pago: paymentMethod,
+        Cambio: change.toFixed(2),
+        Fecha: date
+    };
+
+    // Enviar los datos a la API usando fetch
+    try {
+        const response = await fetch('http://localhost:5000/api/sales', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(saleData)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Venta creada con éxito:', data);
+
+            // Crear el ticket como archivo .txt
+            generateTicketTxt(date, seller, client, description, total, paymentMethod, change);
+        } else {
+            console.log('Error al crear la venta:', response.statusText);
+        }
+    } catch (error) {
+        console.log('Error de red:', error.message);
+    }
 }
+
+// Función para generar el archivo .txt con el ticket
+function generateTicketTxt(date, seller, client, description, total, paymentMethod, change) {
+    // Crear el contenido del ticket
+    let ticketContent = `
+        ------------------------------
+        TICKET DE VENTA
+        ------------------------------
+        Fecha: ${date}
+        Vendedor: ${seller}
+        Cliente: ${client}
+
+        Productos:
+        ------------------------------
+        ${description}
+
+        Total: $${total.toFixed(2)}
+        Método de pago: ${paymentMethod}
+        Cambio: $${change.toFixed(2)}
+
+        ------------------------------
+        Gracias por su compra!
+    `;
+
+    // Crear un Blob con el contenido del ticket
+    const blob = new Blob([ticketContent], { type: 'text/plain' });
+
+    // Crear un enlace de descarga para el archivo .txt
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `ticket_${date}.txt`;
+    link.click(); // Inicia la descarga
+}
+
+
+function calculateChange(total, amountPaid) {
+    const change = amountPaid - total;
+    document.getElementById('change').value = change.toFixed(2);
+    return change;
+}
+
+function Cards() {
+    return {
+        visa: {
+            validate: function(cardNumber) {
+                return /^4[0-9]{12}(?:[0-9]{3})?$/.test(cardNumber);
+            }
+        },
+        mastercard: {
+            validate: function(cardNumber) {
+                return /^5[1-5][0-9]{14}$/.test(cardNumber);
+            }
+        },
+        amex: {
+            validate: function(cardNumber) {
+                return /^3[47][0-9]{13}$/.test(cardNumber);
+            }
+        },
+        discover: {
+            validate: function(cardNumber) {
+                return /^6(?:011|5[0-9]{2})[0-9]{12}$/.test(cardNumber);
+            }
+        },
+        diners: {
+            validate: function(cardNumber) {
+                return /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/.test(cardNumber);
+            }
+        }
+    };
+}
+
+
+// Detecta el tipo de tarjeta basado en el número ingresado
+function detectCardType(cardNumber) {
+    const cardTypes = Cards();
+    for (const type in cardTypes) {
+        if (cardTypes[type].validate(cardNumber)) {
+            return type; // Devuelve el tipo de tarjeta si es válida
+        }
+    }
+    return null; // Si no coincide, devuelve null
+}
+
+// Detectar automáticamente el banco al ingresar el número de tarjeta
+document.getElementById('cardNumber').addEventListener('input', function() {
+    const cardType = detectCardType(this.value);
+    const bankTypeSelect = document.getElementById('bankType');
+    
+    if (cardType) {
+        bankTypeSelect.value = cardType;
+    } else {
+        bankTypeSelect.value = ''; // Limpia el valor si no es un número válido
+    }
+});
+
+// Actualizar el cambio cada vez que se ingresa una cantidad en amountPaid
+document.getElementById('amountPaid').addEventListener('input', function() {
+    const total = parseFloat(document.getElementById('total').value) || 0;
+    const amountPaid = parseFloat(this.value) || 0;
+    calculateChange(total, amountPaid);
+});
 
 // Ejecutar las funciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {

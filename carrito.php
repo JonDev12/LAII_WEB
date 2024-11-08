@@ -88,7 +88,23 @@
                         <div class="form-group">
                             <label for="frecClient">Seleccione el cliente frecuente</label>
                             <select class="form-control" id="frecClient">
-                                <!--Aqui va codigo en php-->
+                                <option value="sel" default>Seleccione un cliente</option>
+                                <?php
+                                // Conexión a la base de datos
+                                $conn = new mysqli('localhost', 'root', 'sixvegas12', 'laii_bd');
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }else{
+                                    // Consulta para obtener los clientes frecuentes
+                                    $sql = "SELECT * FROM clients WHERE is_current_client = 1";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                                        }
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -101,9 +117,14 @@
                         </div>
 
                         <div class="form-group" id="bankTypeGroup" style="display: none;">
-                            <label for="typebank">Seleccione el tipo de Banco</label>
-                            <select class="form-control" id="typebank">
-                                <!-- Aquí va código en PHP -->
+                            <label for="bankType">Seleccione el tipo de Banco</label>
+                            <select class="form-control" id="bankType">
+                                <option value="">Seleccione un banco</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">MasterCard</option>
+                                <option value="amex">American Express</option>
+                                <option value="discover">Discover</option>
+                                <option value="diners">Diners Club</option>
                             </select>
                         </div>
 
@@ -124,7 +145,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="calculateChange()">Finalizar Compra</button>
+                    <button type="button" class="btn btn-primary" onclick="ticket()">Finalizar Compra</button>
                 </div>
             </div>
         </div>
