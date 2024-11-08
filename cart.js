@@ -101,7 +101,7 @@ function stackProduct(product) {
     `;
 
     productList.insertAdjacentHTML('beforeend', productHTML);
-    sendData(product);
+    //sendData(product);
     updateCartTotal();  // Actualizar el total cada vez que se agrega un producto
 }
 
