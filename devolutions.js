@@ -1,3 +1,4 @@
+// Función para redirigir a la página de devolución
 function goToDev() {
     window.location.href = "Devolucion.php";
 }
