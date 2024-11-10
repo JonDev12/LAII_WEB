@@ -237,3 +237,27 @@ app.post('/api/sales', (req, res) => {
         res.json({ message: 'Venta creada', id: results.insertId });
     });
 });
+
+// Ruta para devoluciones usando sp de devoluciones
+app.post('/devolution', async (req, res) => {
+    const { code, Qty } = req.body;
+
+    if (!code || !Qty) {
+        return res.status(400).json({ error: 'Debe proporcionar código de producto y cantidad de devolución' });
+    }
+
+    try {
+        // Llamada al procedimiento almacenado
+        const [result] = await db.query('CALL Devolution(?, ?)', [code, Qty]);
+        // Verificación del resultado
+        res.status(200).json({ message: 'Devolución realizada correctamente', result });
+    } catch (error) {
+        // Verifica si el error es por el SIGNAL en el procedimiento almacenado
+        if (error.sqlState === '45000') {
+            res.status(404).json({ error: error.message });
+        } else {
+            console.error('Error en la devolución:', error);
+            res.status(500).json({ error: 'Error al realizar la devolución' });
+        }
+    }
+});

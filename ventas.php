@@ -25,7 +25,7 @@ $connection = $con->getConnection();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto"></ul>
             <!-- Icono de Carrito de Compras -->
-            <button class="btn btn-outline-secondary" onclick="">
+            <button class="btn btn-outline-secondary" onclick="goToDev()">
                 <i class="bi bi-arrow-return-left" style="font-size: 1.5rem;"></i>
             </button>
             <button class="btn btn-outline-secondary" onclick="goToCart()">
@@ -77,7 +77,7 @@ $connection = $con->getConnection();
             </table>
         </div>
     </div>
-
+    <script src="devolutions.js"></script>
     <script src="cart.js"></script>
     <script src="sales.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
