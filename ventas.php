@@ -25,7 +25,7 @@ $connection = $con->getConnection();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto"></ul>
             <!-- Icono de Carrito de Compras -->
-            <button class="btn btn-outline-secondary" onclick="goToCart()">
+            <button class="btn btn-outline-secondary" onclick="">
                 <i class="bi bi-arrow-return-left" style="font-size: 1.5rem;"></i>
             </button>
             <button class="btn btn-outline-secondary" onclick="goToCart()">
