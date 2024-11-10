@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
+<?php
+// Incluir archivo de conexión a la base de datos
+require_once "./Connection.php";
+$con = new Connection();
+$connection = $con->getConnection();
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +26,9 @@
             <ul class="navbar-nav mr-auto"></ul>
             <!-- Icono de Carrito de Compras -->
             <button class="btn btn-outline-secondary" onclick="goToCart()">
+                <i class="bi bi-arrow-return-left" style="font-size: 1.5rem;"></i>
+            </button>
+            <button class="btn btn-outline-secondary" onclick="goToCart()">
                 <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
             </button>
         </div>
@@ -30,17 +38,41 @@
         <!-- Tabla de ventas con scroll dinámico usando Bootstrap -->
         <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
             <table class="table table-striped table-bordered mt-4">
-                <thead class="thead-light">
+                <thead class="thead-dark">
                     <tr>
-                        <th>Código de Barras</th>
-                        <th>Nombre del Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                        <th>Total</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Descripcion</th>
+                        <th class="text-center">Cliente</th>
+                        <th class="text-center">Cantidad Prod.</th>
+                        <th class="text-center">Total</th>
+                        <th class="text-center">Pago</th>
+                        <th class="text-center">Cambio</th>
+                        <th class="text-center">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                    $sql = "SELECT * FROM ventas";
+                    $result = $connection->query($sql);
 
+                    if ($result === false) {
+                        echo "<tr><td colspan='8' class='text-center'>Error: {$connection->error}</td></tr>";
+                    } else {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td class='text-center'>{$row['IdVentas']}</td>";
+                            echo "<td class='text-center'>{$row['Descripcion']}</td>";
+                            echo "<td class='text-center'>{$row['Cliente']}</td>";
+                            echo "<td class='text-center'>{$row['Productos']}</td>";
+                            echo "<td class='text-center'>{$row['Total']}</td>";
+                            echo "<td class='text-center'>{$row['Pago']}</td>";
+                            echo "<td class='text-center'>{$row['Cambio']}</td>";
+                            echo "<td class='text-center'>{$row['Fecha']}</td>";
+                            echo "</tr>";
+                        }
+                    }
+                    $connection->close();
+                    ?>
                 </tbody>
             </table>
         </div>
